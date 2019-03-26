@@ -9,8 +9,11 @@ class Main extends React.Component {
         console.log("Called From Constructor");
 
         this.state = {
-            toggle : false
+            toggle : false,
+            name: props.name
         }
+
+        console.log(this.props);
 
         //Only Instantiate -- state, any functions
         //No Ajax Calls
@@ -24,6 +27,20 @@ class Main extends React.Component {
         //Validate
         //No Ajax Calls
         //No setstate
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("Called from component will recieve props");
+        console.log(`
+        CURRENTPROPS : ${this.props.name}
+        NEXTPROPS : ${nextProps.name}
+        `);
+
+        if(this.props.name !== nextProps.name){
+            this.setState({
+                name: nextProps.name
+            });
+        }
     }
 
 
@@ -68,6 +85,10 @@ class Main extends React.Component {
         
     }
 
+    componentWillUnmount(){
+        console.log("Called from Component Will Unmount");
+    }
+
 
     render() {
 
@@ -83,7 +104,7 @@ class Main extends React.Component {
         return (
             <div>
                 Hi Learning LifeCycle Hooks
-
+                <p>{this.props.name}</p>
                 <div>
                     {component}
                     <button onClick={this.buttonClickHandler.bind(this)}>Click Here</button>

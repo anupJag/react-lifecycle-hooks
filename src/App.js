@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Main from './components/Main/Main';
 import './App.css';
 
 class App extends Component {
+  
+  state={
+    name: "Anupam",
+    toggle: true
+  }
+
+  buttonClickHandler = () => {
+    this.setState((prevState) => {
+      return{
+        name : `${prevState.name}U`,
+        toggle: !prevState.toggle
+      }
+    });
+  }
+  
   render() {
     return (
       <div className="App">
@@ -21,7 +35,12 @@ class App extends Component {
             Learn React
           </a> */}
         </header>
-        <Main name="Anupam"/>
+        {
+          this.state.toggle && <Main name={this.state.name}/>
+        }        
+        <button onClick={this.buttonClickHandler.bind(this)}>
+          Change Parent App.js NAME
+        </button>
       </div>
     );
   }
